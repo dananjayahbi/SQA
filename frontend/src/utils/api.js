@@ -58,4 +58,101 @@ export const categoryAPI = {
   }
 };
 
+// Product API
+export const productAPI = {
+  getAll: async () => {
+    try {
+      const response = await api.get('/products');
+      return response.data;
+    } catch (error) {
+      throw error.response ? error.response.data : new Error('Failed to fetch products');
+    }
+  },
+  
+  getById: async (id) => {
+    try {
+      const response = await api.get(`/products/${id}`);
+      return response.data;
+    } catch (error) {
+      throw error.response ? error.response.data : new Error('Failed to fetch product');
+    }
+  },
+  
+  create: async (productData) => {
+    try {
+      // Use FormData for file uploads
+      const formData = new FormData();
+      
+      // Append all text fields
+      Object.keys(productData).forEach(key => {
+        if (key !== 'images') {
+          formData.append(key, productData[key]);
+        }
+      });
+      
+      // Append images if any
+      if (productData.images && productData.images.length) {
+        for (let i = 0; i < productData.images.length; i++) {
+          formData.append('images', productData.images[i]);
+        }
+      }
+      
+      const response = await axios.post(`${API_URL}/products`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      
+      return response.data;
+    } catch (error) {
+      throw error.response ? error.response.data : new Error('Failed to create product');
+    }
+  },
+  
+  update: async (id, productData) => {
+    try {
+      // Use FormData for file uploads
+      const formData = new FormData();
+      
+      // Append all text fields
+      Object.keys(productData).forEach(key => {
+        if (key !== 'images') {
+          formData.append(key, productData[key]);
+        }
+      });
+      
+      // Append images if any
+      if (productData.images && productData.images.length) {
+        for (let i = 0; i < productData.images.length; i++) {
+          formData.append('images', productData.images[i]);
+        }
+      }
+      
+      // Flag to keep existing images
+      if (productData.keepExistingImages) {
+        formData.append('keepExistingImages', 'true');
+      }
+      
+      const response = await axios.put(`${API_URL}/products/${id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      
+      return response.data;
+    } catch (error) {
+      throw error.response ? error.response.data : new Error('Failed to update product');
+    }
+  },
+  
+  delete: async (id) => {
+    try {
+      const response = await api.delete(`/products/${id}`);
+      return response.data;
+    } catch (error) {
+      throw error.response ? error.response.data : new Error('Failed to delete product');
+    }
+  }
+};
+
 export default api; 
