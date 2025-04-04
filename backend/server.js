@@ -5,6 +5,7 @@ const connectDB = require('./config/dbConfig');
 
 // Import routes
 const categoryRoutes = require('./routes/categoryRoutes');
+const RegisterRoutes = require('./routes/registerRoutes');
 
 // Validate environment variables
 if (!process.env.MONGODB_URI) {
@@ -30,6 +31,7 @@ app.get('/', (req, res) => {
 
 // Routes
 app.use('/api/categories', categoryRoutes);
+app.use('/api/register', categoryRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

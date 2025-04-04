@@ -13,6 +13,7 @@ import Dashboard from './pages/Dashboard';
 import Products from './pages/Products';
 import ProductCategory from './pages/ProductCategory';
 import Settings from './pages/Settings';
+import Register from './pages/Register';
 
 // Components
 import Layout from './components/Layout';
@@ -27,9 +28,12 @@ const App = () => {
           <Route path="products" element={<Products />} />
           <Route path="categories" element={<ProductCategory />} />
           <Route path="settings" element={<Settings />} />
+          <Route path="/register" element={<Register />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
+
+      
     </ThemeProvider>
   );
 };
