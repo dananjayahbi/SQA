@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
 
 // Routes
 app.use('/api/categories', categoryRoutes);
-app.use('/api/register', categoryRoutes);
+app.use('/api/register', RegisterRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
