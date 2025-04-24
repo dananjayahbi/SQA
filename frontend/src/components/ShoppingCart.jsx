@@ -148,6 +148,7 @@ const ShoppingCart = () => {
                     </IconButton>
                   }
                   sx={{ py: 2 }}
+                  data-testid="cart-item"
                 >
                   <ListItemAvatar>
                     <Avatar 
@@ -175,7 +176,7 @@ const ShoppingCart = () => {
                     }
                     secondary={
                       <>
-                        <Typography variant="body2" color="text.secondary" gutterBottom>
+                        <Typography variant="body2" color="text.secondary" gutterBottom data-testid="cart-item-price">
                           ${item.price.toFixed(2)} each
                         </Typography>
                         <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
@@ -200,7 +201,8 @@ const ShoppingCart = () => {
                             inputProps={{ 
                               min: 1, 
                               max: item.stock, 
-                              style: { textAlign: 'center', padding: '4px', width: '40px' } 
+                              style: { textAlign: 'center', padding: '4px', width: '40px' },
+                              'data-testid': 'cart-item-quantity'
                             }}
                             variant="outlined"
                             sx={{ mx: 1 }}
@@ -256,7 +258,7 @@ const ShoppingCart = () => {
               <Typography variant="h6">
                 Total:
               </Typography>
-              <Typography variant="h6" fontWeight={700} color="primary">
+              <Typography variant="h6" fontWeight={700} color="primary" data-testid="cart-total">
                 ${cart.totalPrice.toFixed(2)}
               </Typography>
             </Box>
@@ -287,7 +289,7 @@ const ShoppingCart = () => {
   return (
     <>
       <Tooltip title="Shopping Cart">
-        <IconButton color="primary" onClick={handleDrawerOpen}>
+        <IconButton color="primary" onClick={handleDrawerOpen} aria-label="shopping cart">
           <Badge badgeContent={cart.totalItems} color="secondary">
             <ShoppingCartIcon />
           </Badge>

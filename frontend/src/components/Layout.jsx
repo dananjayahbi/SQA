@@ -87,15 +87,15 @@ const Layout = () => {
         <ListItem disablePadding>
           <ListItemButton
             component={Link}
-            to="/"
+            to="/dashboard"
             sx={{
               letterSpacing: "2.14%",
-              bgcolor: isCurrentPath("/")
+              bgcolor: isCurrentPath("/dashboard")
                 ? theme.palette.primary.main
                 : "transparent",
-              color: isCurrentPath("/") ? "white" : "inherit",
+              color: isCurrentPath("/dashboard") ? "white" : "inherit",
               "&:hover": {
-                bgcolor: isCurrentPath("/")
+                bgcolor: isCurrentPath("/dashboard")
                   ? theme.palette.primary.dark
                   : "rgba(0, 0, 0, 0.04)",
               },
@@ -103,7 +103,7 @@ const Layout = () => {
           >
             <ListItemIcon
               sx={{
-                color: isCurrentPath("/") ? "inherit" : undefined,
+                color: isCurrentPath("/dashboard") ? "inherit" : undefined,
                 minWidth: 40,
               }}
             >
@@ -164,15 +164,15 @@ const Layout = () => {
         <ListItem disablePadding>
           <ListItemButton
             component={Link}
-            to="/products"
+            to="/dashboard/products"
             sx={{
               letterSpacing: "2.14%",
-              bgcolor: isCurrentPath("/products")
+              bgcolor: isCurrentPath("/dashboard/products")
                 ? theme.palette.primary.main
                 : "transparent",
-              color: isCurrentPath("/products") ? "white" : "inherit",
+              color: isCurrentPath("/dashboard/products") ? "white" : "inherit",
               "&:hover": {
-                bgcolor: isCurrentPath("/products")
+                bgcolor: isCurrentPath("/dashboard/products")
                   ? theme.palette.primary.dark
                   : "rgba(0, 0, 0, 0.04)",
               },
@@ -180,7 +180,7 @@ const Layout = () => {
           >
             <ListItemIcon
               sx={{
-                color: isCurrentPath("/products") ? "inherit" : undefined,
+                color: isCurrentPath("/dashboard/products") ? "inherit" : undefined,
                 minWidth: 40,
               }}
             >
@@ -198,15 +198,15 @@ const Layout = () => {
         <ListItem disablePadding>
           <ListItemButton
             component={Link}
-            to="/categories"
+            to="/dashboard/categories"
             sx={{
               letterSpacing: "2.14%",
-              bgcolor: isCurrentPath("/categories")
+              bgcolor: isCurrentPath("/dashboard/categories")
                 ? theme.palette.primary.main
                 : "transparent",
-              color: isCurrentPath("/categories") ? "white" : "inherit",
+              color: isCurrentPath("/dashboard/categories") ? "white" : "inherit",
               "&:hover": {
-                bgcolor: isCurrentPath("/categories")
+                bgcolor: isCurrentPath("/dashboard/categories")
                   ? theme.palette.primary.dark
                   : "rgba(0, 0, 0, 0.04)",
               },
@@ -214,7 +214,7 @@ const Layout = () => {
           >
             <ListItemIcon
               sx={{
-                color: isCurrentPath("/categories") ? "inherit" : undefined,
+                color: isCurrentPath("/dashboard/categories") ? "inherit" : undefined,
                 minWidth: 40,
               }}
             >
@@ -232,15 +232,15 @@ const Layout = () => {
         <ListItem disablePadding>
           <ListItemButton
             component={Link}
-            to="/settings"
+            to="/dashboard/settings"
             sx={{
               letterSpacing: "2.14%",
-              bgcolor: isCurrentPath("/settings")
+              bgcolor: isCurrentPath("/dashboard/settings")
                 ? theme.palette.primary.main
                 : "transparent",
-              color: isCurrentPath("/settings") ? "white" : "inherit",
+              color: isCurrentPath("/dashboard/settings") ? "white" : "inherit",
               "&:hover": {
-                bgcolor: isCurrentPath("/settings")
+                bgcolor: isCurrentPath("/dashboard/settings")
                   ? theme.palette.primary.dark
                   : "rgba(0, 0, 0, 0.04)",
               },
@@ -248,7 +248,7 @@ const Layout = () => {
           >
             <ListItemIcon
               sx={{
-                color: isCurrentPath("/settings") ? "inherit" : undefined,
+                color: isCurrentPath("/dashboard/settings") ? "inherit" : undefined,
                 minWidth: 40,
               }}
             >

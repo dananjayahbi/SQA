@@ -124,8 +124,7 @@ const ProductsPage = () => {
       
       // Filter by selected categories
       const matchesCategory = selectedCategories.length === 0 || 
-        (product.category && selectedCategories.includes(product.category._id)) ||
-        (product.category && selectedCategories.includes(product.category.name));
+        (product.category && selectedCategories.includes(product.category._id));
       
       // Filter by price range
       const matchesPrice = product.price >= priceRange[0] && product.price <= priceRange[1];
@@ -273,6 +272,33 @@ const ProductsPage = () => {
         </AccordionSummary>
         <AccordionDetails>
           <List dense disablePadding sx={{ mt: -1 }}>
+            {/* All Categories option */}
+            <ListItem disablePadding sx={{ py: 0 }}>
+              <ListItemButton 
+                role={undefined} 
+                onClick={() => setSelectedCategories([])}
+                dense
+              >
+                <Checkbox
+                  edge="start"
+                  checked={selectedCategories.length === 0}
+                  tabIndex={-1}
+                  disableRipple
+                  data-testid="category-checkbox-all"
+                />
+                <ListItemText 
+                  primary="All"
+                  primaryTypographyProps={{ 
+                    variant: 'body2',
+                    fontWeight: selectedCategories.length === 0 ? 600 : 400
+                  }}
+                />
+              </ListItemButton>
+            </ListItem>
+            
+            {/* Divider between All and specific categories */}
+            <Divider sx={{ my: 1 }} />
+            
             {categories.map((category) => (
               <ListItem key={category._id} disablePadding sx={{ py: 0 }}>
                 <ListItemButton 
@@ -289,7 +315,10 @@ const ProductsPage = () => {
                   />
                   <ListItemText 
                     primary={category.name} 
-                    primaryTypographyProps={{ variant: 'body2' }}
+                    primaryTypographyProps={{ 
+                      variant: 'body2',
+                      fontWeight: selectedCategories.includes(category._id) ? 600 : 400
+                    }}
                   />
                 </ListItemButton>
               </ListItem>
@@ -310,7 +339,7 @@ const ProductsPage = () => {
               onChange={handlePriceRangeChange}
               valueLabelDisplay="auto"
               min={0}
-              max={1000}
+              max={20000}
               data-testid="price-range-slider"
             />
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
@@ -441,6 +470,12 @@ const ProductsPage = () => {
                   variant="outlined"
                   size="small"
                   data-testid="product-search-input"
+                  sx={{ zIndex: 1 }} // Ensure the input is on top and clickable
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      handleSearchSubmit(e);
+                    }
+                  }}
                 />
               </Box>
             </Grid>
@@ -497,16 +532,24 @@ const ProductsPage = () => {
           {filterContent}
         </Drawer>
         
-        <Grid container spacing={3}>
+        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' } }}>
           {/* Filter sidebar (desktop) */}
           {!isMobile && (
-            <Grid item md={3} lg={2.5}>
+            <Box 
+              sx={{ 
+                width: { md: '280px' }, 
+                flexShrink: 0,
+                position: { md: 'sticky' },
+                top: '24px',
+                alignSelf: 'flex-start'
+              }}
+            >
               {filterContent}
-            </Grid>
+            </Box>
           )}
           
           {/* Product grid */}
-          <Grid item xs={12} md={9} lg={9.5}>
+          <Box sx={{ flexGrow: 1, ml: { md: 3 } }}>
             {/* Product count */}
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
               <Typography variant="body2" color="text.secondary">
@@ -550,10 +593,10 @@ const ProductsPage = () => {
             ) : (
               <Grid container spacing={3}>
                 {displayedProducts.map(product => (
-                  <Grid item xs={12} sm={6} md={4} lg={3} key={product._id}>
+                  <Grid item xs={12} sm={6} md={6} lg={4} xl={3} key={product._id} sx={{ display: 'flex' }}>
                     <Card 
                       sx={{ 
-                        height: '100%',
+                        width: '100%',
                         display: 'flex',
                         flexDirection: 'column',
                         border: '1px solid #e0e0e0',
@@ -714,8 +757,8 @@ const ProductsPage = () => {
                 />
               </Box>
             )}
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
       </Container>
     </Box>
   );
