@@ -21,7 +21,8 @@ import {
   DialogActions,
   Tooltip,
   CircularProgress,
-  Alert
+  Alert,
+  Snackbar
 } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -33,7 +34,7 @@ import { useCart } from '../contexts/CartContext';
 const ShoppingCart = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const { cart, addToCart, removeFromCart, updateQuantity, clearCart } = useCart();
+  const { cart, addToCart, removeFromCart, updateQuantity, clearCart, stockExceededMessage } = useCart();
   
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [checkoutDialogOpen, setCheckoutDialogOpen] = useState(false);
@@ -141,6 +142,7 @@ const ShoppingCart = () => {
                       aria-label="delete"
                       onClick={() => updateQuantity(item._id, 0)}
                       sx={{ color: theme.palette.error.main }}
+                      style={{marginTop: "30px"}}
                     >
                       <DeleteIcon />
                     </IconButton>
@@ -197,6 +199,7 @@ const ShoppingCart = () => {
                             }}
                             inputProps={{ 
                               min: 1, 
+                              max: item.stock, 
                               style: { textAlign: 'center', padding: '4px', width: '40px' } 
                             }}
                             variant="outlined"
@@ -206,6 +209,7 @@ const ShoppingCart = () => {
                           <IconButton 
                             size="small" 
                             onClick={() => addToCart(item)}
+                            disabled={item.quantity >= item.stock}
                             sx={{ p: 0.5 }}
                           >
                             <AddIcon fontSize="small" />
@@ -215,6 +219,11 @@ const ShoppingCart = () => {
                             ${(item.price * item.quantity).toFixed(2)}
                           </Typography>
                         </Box>
+                        {item.quantity === item.stock && (
+                          <Typography variant="caption" color="warning.main" sx={{ display: 'block', mt: 0.5 }}>
+                            Max stock reached
+                          </Typography>
+                        )}
                       </>
                     }
                   />
@@ -298,6 +307,17 @@ const ShoppingCart = () => {
       >
         {cartContent}
       </Drawer>
+      
+      {/* Stock exceeded message */}
+      <Snackbar
+        open={!!stockExceededMessage}
+        autoHideDuration={3000}
+        message={stockExceededMessage}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        ContentProps={{
+          sx: { bgcolor: 'warning.main', color: 'warning.contrastText' }
+        }}
+      />
       
       {/* Checkout Dialog */}
       <Dialog

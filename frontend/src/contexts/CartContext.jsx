@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import React, { createContext, useContext, useReducer, useEffect, useState } from 'react';
 
 // Initial state for the cart
 const initialState = {
@@ -14,19 +14,26 @@ const CartContext = createContext();
 const cartReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_TO_CART': {
+      const { product, stockLimit } = action.payload;
       const existingItemIndex = state.items.findIndex(
-        (item) => item._id === action.payload._id
+        (item) => item._id === product._id
       );
 
       let updatedItems;
       if (existingItemIndex > -1) {
-        // Item exists, update quantity
+        // Item exists, update quantity (respecting stock limit)
         updatedItems = state.items.map((item, index) => {
           if (index === existingItemIndex) {
+            // Check if adding one more would exceed stock
+            const newQuantity = item.quantity + 1;
+            if (newQuantity > stockLimit) {
+              // Don't update if exceeding stock limit
+              return item;
+            }
             return {
               ...item,
-              quantity: item.quantity + 1,
-              totalPrice: (item.quantity + 1) * item.price,
+              quantity: newQuantity,
+              totalPrice: newQuantity * item.price,
             };
           }
           return item;
@@ -34,9 +41,9 @@ const cartReducer = (state, action) => {
       } else {
         // Add new item to cart
         const newItem = {
-          ...action.payload,
+          ...product,
           quantity: 1,
-          totalPrice: action.payload.price,
+          totalPrice: product.price,
         };
         updatedItems = [...state.items, newItem];
       }
@@ -95,7 +102,7 @@ const cartReducer = (state, action) => {
     }
 
     case 'UPDATE_QUANTITY': {
-      const { _id, quantity } = action.payload;
+      const { _id, quantity, stockLimit } = action.payload;
       
       if (quantity <= 0) {
         const updatedItems = state.items.filter(item => item._id !== _id);
@@ -110,12 +117,17 @@ const cartReducer = (state, action) => {
         };
       }
       
+      // Don't allow updating beyond stock limit
       const updatedItems = state.items.map(item => {
         if (item._id === _id) {
+          // Check if the new quantity exceeds stock limit
+          const newQuantity = stockLimit !== undefined ? 
+            Math.min(quantity, stockLimit) : quantity;
+            
           return {
             ...item,
-            quantity,
-            totalPrice: quantity * item.price,
+            quantity: newQuantity,
+            totalPrice: newQuantity * item.price,
           };
         }
         return item;
@@ -144,6 +156,8 @@ const cartReducer = (state, action) => {
 
 // Cart provider component
 export const CartProvider = ({ children }) => {
+  const [stockExceededMessage, setStockExceededMessage] = useState('');
+  
   // Try to load cart from localStorage
   const loadCartFromStorage = () => {
     try {
@@ -164,7 +178,25 @@ export const CartProvider = ({ children }) => {
 
   // Cart actions
   const addToCart = (product) => {
-    dispatch({ type: 'ADD_TO_CART', payload: product });
+    // Find if the product is already in the cart
+    const existingItem = cart.items.find(item => item._id === product._id);
+    const currentQuantity = existingItem ? existingItem.quantity : 0;
+    
+    // Check if adding one more would exceed the stock
+    if (currentQuantity >= product.stock) {
+      setStockExceededMessage(`Cannot add more ${product.name}. Stock limit reached (${product.stock} available).`);
+      setTimeout(() => setStockExceededMessage(''), 3000);
+      return false;
+    }
+
+    dispatch({ 
+      type: 'ADD_TO_CART', 
+      payload: { 
+        product, 
+        stockLimit: product.stock 
+      }
+    });
+    return true;
   };
 
   const removeFromCart = (product) => {
@@ -172,9 +204,24 @@ export const CartProvider = ({ children }) => {
   };
 
   const updateQuantity = (productId, quantity) => {
+    // Find the current product in cart to get its stock limit
+    const product = cart.items.find(item => item._id === productId);
+    if (!product) return;
+    
+    // Check if requested quantity exceeds stock
+    if (quantity > product.stock) {
+      setStockExceededMessage(`Cannot add ${quantity} units of ${product.name}. Only ${product.stock} available.`);
+      setTimeout(() => setStockExceededMessage(''), 3000);
+      quantity = product.stock; // Limit to max stock
+    }
+    
     dispatch({ 
       type: 'UPDATE_QUANTITY', 
-      payload: { _id: productId, quantity }
+      payload: { 
+        _id: productId, 
+        quantity,
+        stockLimit: product.stock
+      }
     });
   };
 
@@ -190,6 +237,7 @@ export const CartProvider = ({ children }) => {
         removeFromCart,
         updateQuantity,
         clearCart,
+        stockExceededMessage,
       }}
     >
       {children}
