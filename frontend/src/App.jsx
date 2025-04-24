@@ -7,11 +7,13 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { CssBaseline } from '@mui/material';
 import theme from './styles/theme';
+import { CartProvider } from './contexts/CartContext';
 
 // Pages
 import Dashboard from './pages/Dashboard';
 import Products from './pages/Products';
 import ProductCategory from './pages/ProductCategory';
+import ProductStore from './pages/ProductStore';
 import Settings from './pages/Settings';
 
 // Components
@@ -21,15 +23,18 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="products" element={<Products />} />
-          <Route path="categories" element={<ProductCategory />} />
-          <Route path="settings" element={<Settings />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Route>
-      </Routes>
+      <CartProvider>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="store" element={<ProductStore />} />
+            <Route path="products" element={<Products />} />
+            <Route path="categories" element={<ProductCategory />} />
+            <Route path="settings" element={<Settings />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Route>
+        </Routes>
+      </CartProvider>
     </ThemeProvider>
   );
 };

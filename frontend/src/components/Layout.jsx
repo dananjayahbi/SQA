@@ -26,6 +26,8 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PersonIcon from "@mui/icons-material/Person";
+import StorefrontIcon from "@mui/icons-material/Storefront";
+import ShoppingCart from "./ShoppingCart";
 
 const DRAWER_WIDTH = 240;
 
@@ -116,6 +118,42 @@ const Layout = () => {
             />
           </ListItemButton>
         </ListItem>
+
+        <ListItem disablePadding>
+          <ListItemButton
+            component={Link}
+            to="/store"
+            sx={{
+              letterSpacing: "2.14%",
+              bgcolor: isCurrentPath("/store")
+                ? theme.palette.primary.main
+                : "transparent",
+              color: isCurrentPath("/store") ? "white" : "inherit",
+              "&:hover": {
+                bgcolor: isCurrentPath("/store")
+                  ? theme.palette.primary.dark
+                  : "rgba(0, 0, 0, 0.04)",
+              },
+            }}
+          >
+            <ListItemIcon
+              sx={{
+                color: isCurrentPath("/store") ? "inherit" : undefined,
+                minWidth: 40,
+              }}
+            >
+              <StorefrontIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Store"
+              primaryTypographyProps={{
+                fontWeight: 600,
+                letterSpacing: "2.14%",
+              }}
+            />
+          </ListItemButton>
+        </ListItem>
+
         <ListItem disablePadding>
           <ListItemButton
             component={Link}
@@ -244,6 +282,9 @@ const Layout = () => {
           <Box sx={{ flexGrow: 1 }} />
 
           <Box sx={{ display: "flex", alignItems: "center" }}>
+            {/* Shopping Cart */}
+            <ShoppingCart />
+            
             <Box
               sx={{
                 display: "flex",
