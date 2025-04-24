@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "mocha tests/selenium/**/*.test.js --timeout 60000",
+    "test:single": "mocha --timeout 60000"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -26,10 +28,13 @@
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",
+    "chai": "^4.3.7",
     "eslint": "^9.21.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
+    "mocha": "^10.2.0",
+    "selenium-webdriver": "^4.10.0",
     "vite": "^6.2.0"
   }
 }
