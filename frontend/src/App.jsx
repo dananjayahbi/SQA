@@ -16,6 +16,8 @@ import ProductCategory from './pages/ProductCategory';
 import ProductStore from './pages/ProductStore';
 import Settings from './pages/Settings';
 import Register from './pages/Register';
+import Feedback from './pages/Feedback';
+
 
 // Pages - Storefront
 import Home from './pages/Home';
@@ -38,7 +40,14 @@ const App = () => {
           <Route path="products" element={<Products />} />
           <Route path="categories" element={<ProductCategory />} />
           <Route path="settings" element={<Settings />} />
+
           <Route path="/register" element={<Register />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
+      </Routes>
+
+
+          <Route path="/feedback" element={<Feedback />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
