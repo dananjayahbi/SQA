@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Typography,
@@ -40,6 +40,19 @@ const ShoppingCart = () => {
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [checkoutSuccess, setCheckoutSuccess] = useState(false);
   const [checkoutError, setCheckoutError] = useState('');
+  
+  // Listen for custom event to open cart (from mobile FAB)
+  useEffect(() => {
+    const handleOpenCart = () => {
+      setDrawerOpen(true);
+    };
+    
+    window.addEventListener('open-cart', handleOpenCart);
+    
+    return () => {
+      window.removeEventListener('open-cart', handleOpenCart);
+    };
+  }, []);
   
   const handleDrawerOpen = () => {
     setDrawerOpen(true);

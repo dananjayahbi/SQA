@@ -121,8 +121,10 @@ const Layout = () => {
 
         <ListItem disablePadding>
           <ListItemButton
-            component={Link}
-            to="/store"
+            component="a"
+            href="/store"
+            target="_blank"
+            rel="noopener noreferrer"
             sx={{
               letterSpacing: "2.14%",
               bgcolor: isCurrentPath("/store")
@@ -146,9 +148,14 @@ const Layout = () => {
             </ListItemIcon>
             <ListItemText
               primary="Store"
+              secondary="Customer View"
               primaryTypographyProps={{
                 fontWeight: 600,
                 letterSpacing: "2.14%",
+              }}
+              secondaryTypographyProps={{
+                fontSize: '0.7rem',
+                color: 'text.secondary',
               }}
             />
           </ListItemButton>
