@@ -6,6 +6,7 @@ const connectDB = require('./config/dbConfig');
 
 // Import routes
 const categoryRoutes = require('./routes/categoryRoutes');
+const RegisterRoutes = require('./routes/registerRoutes');
 const feedbackRoutes = require('./routes/feedbackRoutes');
 const productRoutes = require('./routes/productRoutes');
 
@@ -37,6 +38,7 @@ app.get('/', (req, res) => {
 
 // Routes
 app.use('/api/categories', categoryRoutes);
+app.use('/api/register', RegisterRoutes);
 app.use('/api/feedback', feedbackRoutes);
 app.use('/api/products', productRoutes);
 
