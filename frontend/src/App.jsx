@@ -43,10 +43,7 @@ const App = () => {
             <Route path="store" element={<ProductStore />} />
             <Route path="settings" element={<Settings />} />
             <Route path="register" element={<Register />} />
-
             <Route path="feedback" element={<Feedback />} />
-
-
           </Route>
 
           {/* Storefront Routes */}
@@ -57,20 +54,16 @@ const App = () => {
             <Route path="store/products/:id" element={<ProductDetail />} />
             <Route path="store/about" element={<AboutUs />} />
             <Route path="register" element={<Register />} />
-
             <Route path="feedback" element={<Feedback />} />
           </Route>
 
-          {/* Fallback Route */}
+          {/* Login Route */}
+          <Route path="login" element={<Login />} />
 
-            <Route path="login" element={<Login />} />
-          </Route>
-
-          {/* Additional Routes */}
+          {/* Global Feedback Route (optional if you want it available from anywhere) */}
           <Route path="/feedback" element={<Feedback />} />
-          
-          {/* Fallback */}
 
+          {/* Fallback */}
           <Route path="*" element={<Navigate to="/store" replace />} />
         </Routes>
       </CartProvider>
