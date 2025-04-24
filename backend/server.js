@@ -1,11 +1,13 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 const connectDB = require('./config/dbConfig');
 
 // Import routes
 const categoryRoutes = require('./routes/categoryRoutes');
 const feedbackRoutes = require('./routes/feedbackRoutes');
+const productRoutes = require('./routes/productRoutes');
 
 
 // Validate environment variables
@@ -25,6 +27,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Serve static files
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
+
 // Root route
 app.get('/', (req, res) => {
     res.json({ message: 'Welcome to SQA Backend API' });
@@ -33,6 +38,7 @@ app.get('/', (req, res) => {
 // Routes
 app.use('/api/categories', categoryRoutes);
 app.use('/api/feedback', feedbackRoutes);
+app.use('/api/products', productRoutes);
 
 
 // Error handling middleware
