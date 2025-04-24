@@ -6,6 +6,7 @@ const connectDB = require('./config/dbConfig');
 
 // Import routes
 const categoryRoutes = require('./routes/categoryRoutes');
+const RegisterRoutes = require('./routes/registerRoutes');
 const productRoutes = require('./routes/productRoutes');
 
 // Validate environment variables
@@ -35,6 +36,7 @@ app.get('/', (req, res) => {
 
 // Routes
 app.use('/api/categories', categoryRoutes);
+app.use('/api/register', RegisterRoutes);
 app.use('/api/products', productRoutes);
 
 // Error handling middleware

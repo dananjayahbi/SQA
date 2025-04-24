@@ -15,6 +15,7 @@ import Products from './pages/Products';
 import ProductCategory from './pages/ProductCategory';
 import ProductStore from './pages/ProductStore';
 import Settings from './pages/Settings';
+import Register from './pages/Register';
 
 // Pages - Storefront
 import Home from './pages/Home';
@@ -30,6 +31,18 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="products" element={<Products />} />
+          <Route path="categories" element={<ProductCategory />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
+      </Routes>
+
       <CartProvider>
         <Routes>
           {/* Admin Dashboard Routes */}
