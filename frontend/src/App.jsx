@@ -13,6 +13,7 @@ import Dashboard from './pages/Dashboard';
 import Products from './pages/Products';
 import ProductCategory from './pages/ProductCategory';
 import Settings from './pages/Settings';
+import Feedback from './pages/Feedback';
 
 // Components
 import Layout from './components/Layout';
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="products" element={<Products />} />
           <Route path="categories" element={<ProductCategory />} />
           <Route path="settings" element={<Settings />} />
+          <Route path="/feedback" element={<Feedback />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
