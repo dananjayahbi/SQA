@@ -2,7 +2,7 @@ import { Builder, By, until } from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome.js';
 
 // Base URL for testing
-const BASE_URL = 'http://localhost:5173';
+const BASE_URL = 'http://localhost:5174';
 
 // Common function to set up a webdriver instance
 export async function setupDriver() {
