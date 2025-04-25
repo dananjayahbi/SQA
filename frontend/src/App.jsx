@@ -15,6 +15,9 @@ import Products from './pages/Products';
 import ProductCategory from './pages/ProductCategory';
 import ProductStore from './pages/ProductStore';
 import Settings from './pages/Settings';
+import Register from './pages/Register';
+import Login from './pages/login';
+import Feedback from './pages/Feedback';
 
 // Pages - Storefront
 import Home from './pages/Home';
@@ -39,8 +42,10 @@ const App = () => {
             <Route path="categories" element={<ProductCategory />} />
             <Route path="store" element={<ProductStore />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="register" element={<Register />} />
+            <Route path="feedback" element={<Feedback />} />
           </Route>
-          
+
           {/* Storefront Routes */}
           <Route path="/" element={<StorefrontLayout />}>
             <Route index element={<Navigate to="/store" replace />} />
@@ -48,9 +53,17 @@ const App = () => {
             <Route path="store/products" element={<ProductsPage />} />
             <Route path="store/products/:id" element={<ProductDetail />} />
             <Route path="store/about" element={<AboutUs />} />
+            <Route path="register" element={<Register />} />
+            <Route path="feedback" element={<Feedback />} />
           </Route>
-          
-          {/* Fallback route */}
+
+          {/* Login Route */}
+          <Route path="login" element={<Login />} />
+
+          {/* Global Feedback Route (optional if you want it available from anywhere) */}
+          <Route path="/feedback" element={<Feedback />} />
+
+          {/* Fallback */}
           <Route path="*" element={<Navigate to="/store" replace />} />
         </Routes>
       </CartProvider>

@@ -2,11 +2,15 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
+const mongoose = require('mongoose');
 const connectDB = require('./config/dbConfig');
 
 // Import routes
 const categoryRoutes = require('./routes/categoryRoutes');
+const feedbackRoutes = require('./routes/feedbackRoutes');
 const productRoutes = require('./routes/productRoutes');
+const authRoutes = require('./routes/authRoutes');
+
 
 // Validate environment variables
 if (!process.env.MONGODB_URI) {
@@ -35,7 +39,10 @@ app.get('/', (req, res) => {
 
 // Routes
 app.use('/api/categories', categoryRoutes);
+app.use('/api/feedback', feedbackRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api', authRoutes);
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {
