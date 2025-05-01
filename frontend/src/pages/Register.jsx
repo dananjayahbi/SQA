@@ -122,7 +122,7 @@ const Register = () => {
       }} />
       
       <div style={{
-        maxWidth: '600px',
+        maxWidth: '800px', // Increased to accommodate two-column layout
         width: '100%',
         margin: '20px',
         position: 'relative',
@@ -198,189 +198,210 @@ const Register = () => {
             textShadow: '1px 1px 2px rgba(0,0,0,0.1)'
           }}>Create Account</h2>
 
-          <div style={{ marginBottom: '25px' }}>
-            <label htmlFor="name" style={{ display: 'block', marginBottom: '8px', color: '#00b7eb', fontWeight: '600' }}>Full Name</label>
-            <input 
-              type="text" 
-              id="name" 
-              name="name" 
-              value={formData.name} 
-              onChange={handleChange} 
-              placeholder="Enter your full name"
-              style={{ 
-                width: '100%', 
-                padding: '12px', 
-                border: '2px solid #ffd700', 
-                borderRadius: '8px', 
-                fontSize: '16px', 
-                transition: 'all 0.3s', 
-                background: 'rgba(255,255,255,0.8)',
-                boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)'
-              }} 
-            />
-            {errors.name && <span style={{ color: '#ff4500', fontSize: '13px', marginTop: '6px', display: 'block' }}>{errors.name}</span>}
+          {/* Row 1: Name + Email */}
+          <div style={{ display: 'flex', gap: '20px', marginBottom: '25px' }}>
+            <div style={{ flex: 1 }}>
+              <label htmlFor="name" style={{ display: 'block', marginBottom: '8px', color: '#00b7eb', fontWeight: '600' }}>Full Name</label>
+              <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                value={formData.name} 
+                onChange={handleChange} 
+                placeholder="Enter your full name"
+                style={{ 
+                  width: '100%', 
+                  padding: '12px', 
+                  border: '2px solid #ffd700', 
+                  borderRadius: '8px', 
+                  fontSize: '16px', 
+                  transition: 'all 0.3s', 
+                  background: 'rgba(255,255,255,0.8)',
+                  boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)',
+                  boxSizing: 'border-box'
+                }} 
+              />
+              {errors.name && <span style={{ color: '#ff4500', fontSize: '13px', marginTop: '6px', display: 'block' }}>{errors.name}</span>}
+            </div>
+
+            <div style={{ flex: 1 }}>
+              <label htmlFor="email" style={{ display: 'block', marginBottom: '8px', color: '#00b7eb', fontWeight: '600' }}>Email</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                value={formData.email} 
+                onChange={handleChange} 
+                placeholder="Enter your email"
+                style={{ 
+                  width: '100%', 
+                  padding: '12px', 
+                  border: '2px solid #ffd700', 
+                  borderRadius: '8px', 
+                  fontSize: '16px', 
+                  transition: 'all 0.3s', 
+                  background: 'rgba(255,255,255,0.8)',
+                  boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)',
+                  boxSizing: 'border-box'
+                }} 
+              />
+              {errors.email && <span style={{ color: '#ff4500', fontSize: '13px', marginTop: '6px', display: 'block' }}>{errors.email}</span>}
+            </div>
           </div>
 
-          <div style={{ marginBottom: '25px' }}>
-            <label htmlFor="email" style={{ display: 'block', marginBottom: '8px', color: '#00b7eb', fontWeight: '600' }}>Email</label>
-            <input 
-              type="email" 
-              id="email" 
-              name="email" 
-              value={formData.email} 
-              onChange={handleChange} 
-              placeholder="Enter your email"
-              style={{ 
-                width: '100%', 
-                padding: '12px', 
-                border: '2px solid #ffd700', 
-                borderRadius: '8px', 
-                fontSize: '16px', 
-                transition: 'all 0.3s', 
-                background: 'rgba(255,255,255,0.8)',
-                boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)'
-              }} 
-            />
-            {errors.email && <span style={{ color: '#ff4500', fontSize: '13px', marginTop: '6px', display: 'block' }}>{errors.email}</span>}
+          {/* Row 2: Gender + DOB */}
+          <div style={{ display: 'flex', gap: '20px', marginBottom: '25px' }}>
+            <div style={{ flex: 1 }}>
+              <label htmlFor="gender" style={{ display: 'block', marginBottom: '8px', color: '#00b7eb', fontWeight: '600' }}>Gender</label>
+              <select 
+                id="gender" 
+                name="gender" 
+                value={formData.gender} 
+                onChange={handleChange}
+                style={{ 
+                  width: '100%', 
+                  padding: '12px', 
+                  border: '2px solid #ffd700', 
+                  borderRadius: '8px', 
+                  fontSize: '16px', 
+                  background: 'rgba(255,255,255,0.8)', 
+                  color: '#2c3e50',
+                  boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)',
+                  boxSizing: 'border-box',
+                  height: '44px' // Match input height
+                }}
+              >
+               <option value="" disabled hidden>Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+
+              </select>
+              {errors.gender && <span style={{ color: '#ff4500', fontSize: '13px', marginTop: '6px', display: 'block' }}>{errors.gender}</span>}
+            </div>
+
+            <div style={{ flex: 1 }}>
+              <label htmlFor="dob" style={{ display: 'block', marginBottom: '8px', color: '#00b7eb', fontWeight: '600' }}>Date of Birth</label>
+              <input 
+                type="date" 
+                id="dob" 
+                name="dob" 
+                value={formData.dob} 
+                onChange={handleChange}
+                style={{ 
+                  width: '100%', 
+                  padding: '12px', 
+                  border: '2px solid #ffd700', 
+                  borderRadius: '8px', 
+                  fontSize: '16px', 
+                  background: 'rgba(255,255,255,0.8)',
+                  boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)',
+                  boxSizing: 'border-box'
+                }} 
+              />
+              {errors.dob && <span style={{ color: '#ff4500', fontSize: '13px', marginTop: '6px', display: 'block' }}>{errors.dob}</span>}
+            </div>
           </div>
 
-          <div style={{ marginBottom: '25px' }}>
-            <label htmlFor="gender" style={{ display: 'block', marginBottom: '8px', color: '#00b7eb', fontWeight: '600' }}>Gender</label>
-            <select 
-              id="gender" 
-              name="gender" 
-              value={formData.gender} 
-              onChange={handleChange}
-              style={{ 
-                width: '100%', 
-                padding: '12px', 
-                border: '2px solid #ffd700', 
-                borderRadius: '8px', 
-                fontSize: '16px', 
-                background: 'rgba(255,255,255,0.8)', 
-                color: '#2c3e50',
-                boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)'
-              }}
-            >
-              <option value="">Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
-            {errors.gender && <span style={{ color: '#ff4500', fontSize: '13px', marginTop: '6px', display: 'block' }}>{errors.gender}</span>}
+          {/* Row 3: Address + Phone */}
+          <div style={{ display: 'flex', gap: '20px', marginBottom: '25px' }}>
+            <div style={{ flex: 1 }}>
+              <label htmlFor="address" style={{ display: 'block', marginBottom: '8px', color: '#00b7eb', fontWeight: '600' }}>Address</label>
+              <textarea 
+                id="address" 
+                name="address" 
+                value={formData.address} 
+                onChange={handleChange} 
+                placeholder="Enter your address"
+                style={{ 
+                  width: '100%', 
+                  padding: '12px', 
+                  border: '2px solid #ffd700', 
+                  borderRadius: '8px', 
+                  fontSize: '16px', 
+                  height: '44px', // Match input height
+                  resize: 'none', // Prevent resizing
+                  background: 'rgba(255,255,255,0.8)',
+                  boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)',
+                  boxSizing: 'border-box'
+                }} 
+              />
+              {errors.address && <span style={{ color: '#ff4500', fontSize: '13px', marginTop: '6px', display: 'block' }}>{errors.address}</span>}
+            </div>
+
+            <div style={{ flex: 1 }}>
+              <label htmlFor="phone" style={{ display: 'block', marginBottom: '8px', color: '#00b7eb', fontWeight: '600' }}>Phone Number</label>
+              <input 
+                type="tel" 
+                id="phone" 
+                name="phone" 
+                value={formData.phone} 
+                onChange={handleChange} 
+                placeholder="Enter your phone number"
+                style={{ 
+                  width: '100%', 
+                  padding: '12px', 
+                  border: '2px solid #ffd700', 
+                  borderRadius: '8px', 
+                  fontSize: '16px', 
+                  transition: 'all 0.3s', 
+                  background: 'rgba(255,255,255,0.8)',
+                  boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)',
+                  boxSizing: 'border-box'
+                }} 
+              />
+              {errors.phone && <span style={{ color: '#ff4500', fontSize: '13px', marginTop: '6px', display: 'block' }}>{errors.phone}</span>}
+            </div>
           </div>
 
-          <div style={{ marginBottom: '25px' }}>
-            <label htmlFor="dob" style={{ display: 'block', marginBottom: '8px', color: '#00b7eb', fontWeight: '600' }}>Date of Birth</label>
-            <input 
-              type="date" 
-              id="dob" 
-              name="dob" 
-              value={formData.dob} 
-              onChange={handleChange}
-              style={{ 
-                width: '100%', 
-                padding: '12px', 
-                border: '2px solid #ffd700', 
-                borderRadius: '8px', 
-                fontSize: '16px', 
-                background: 'rgba(255,255,255,0.8)',
-                boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)'
-              }} 
-            />
-            {errors.dob && <span style={{ color: '#ff4500', fontSize: '13px', marginTop: '6px', display: 'block' }}>{errors.dob}</span>}
-          </div>
+          {/* Row 4: Password + Confirm Password */}
+          <div style={{ display: 'flex', gap: '20px', marginBottom: '25px' }}>
+            <div style={{ flex: 1 }}>
+              <label htmlFor="password" style={{ display: 'block', marginBottom: '8px', color: '#00b7eb', fontWeight: '600' }}>Password</label>
+              <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                value={formData.password} 
+                onChange={handleChange} 
+                placeholder="Enter your password"
+                style={{ 
+                  width: '100%', 
+                  padding: '12px', 
+                  border: '2px solid #ffd700', 
+                  borderRadius: '8px', 
+                  fontSize: '16px', 
+                  transition: 'all 0.3s', 
+                  background: 'rgba(255,255,255,0.8)',
+                  boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)',
+                  boxSizing: 'border-box'
+                }} 
+              />
+              {errors.password && <span style={{ color: '#ff4500', fontSize: '13px', marginTop: '6px', display: 'block' }}>{errors.password}</span>}
+            </div>
 
-          <div style={{ marginBottom: '25px' }}>
-            <label htmlFor="address" style={{ display: 'block', marginBottom: '8px', color: '#00b7eb', fontWeight: '600' }}>Address</label>
-            <textarea 
-              id="address" 
-              name="address" 
-              value={formData.address} 
-              onChange={handleChange} 
-              placeholder="Enter your address"
-              style={{ 
-                width: '100%', 
-                padding: '12px', 
-                border: '2px solid #ffd700', 
-                borderRadius: '8px', 
-                fontSize: '16px', 
-                minHeight: '100px', 
-                resize: 'vertical', 
-                background: 'rgba(255,255,255,0.8)',
-                boxShadow: 'inset 0 2px 4 to 4px rgba(0,0,0,0.1)'
-              }} 
-            />
-            {errors.address && <span style={{ color: '#ff4500', fontSize: '13px', marginTop: '6px', display: 'block' }}>{errors.address}</span>}
-          </div>
-
-          <div style={{ marginBottom: '25px' }}>
-            <label htmlFor="phone" style={{ display: 'block', marginBottom: '8px', color: '#00b7eb', fontWeight: '600' }}>Phone Number</label>
-            <input 
-              type="tel" 
-              id="phone" 
-              name="phone" 
-              value={formData.phone} 
-              onChange={handleChange} 
-              placeholder="Enter your phone number"
-              style={{ 
-                width: '100%', 
-                padding: '12px', 
-                border: '2px solid #ffd700', 
-                borderRadius: '8px', 
-                fontSize: '16px', 
-                transition: 'all 0.3s', 
-                background: 'rgba(255,255,255,0.8)',
-                boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)'
-              }} 
-            />
-            {errors.phone && <span style={{ color: '#ff4500', fontSize: '13px', marginTop: '6px', display: 'block' }}>{errors.phone}</span>}
-          </div>
-
-          <div style={{ marginBottom: '25px' }}>
-            <label htmlFor="password" style={{ display: 'block', marginBottom: '8px', color: '#00b7eb', fontWeight: '600' }}>Password</label>
-            <input 
-              type="password" 
-              id="password" 
-              name="password" 
-              value={formData.password} 
-              onChange={handleChange} 
-              placeholder="Enter your password"
-              style={{ 
-                width: '100%', 
-                padding: '12px', 
-                border: '2px solid #ffd700', 
-                borderRadius: '8px', 
-                fontSize: '16px', 
-                transition: 'all 0.3s', 
-                background: 'rgba(255,255,255,0.8)',
-                boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)'
-              }} 
-            />
-            {errors.password && <span style={{ color: '#ff4500', fontSize: '13px', marginTop: '6px', display: 'block' }}>{errors.password}</span>}
-          </div>
-
-          <div style={{ marginBottom: '25px' }}>
-            <label htmlFor="retypePassword" style={{ display: 'block', marginBottom: '8px', color: '#00b7eb', fontWeight: '600' }}>Confirm Password</label>
-            <input 
-              type="password" 
-              id="retypePassword" 
-              name="retypePassword" 
-              value={formData.retypePassword} 
-              onChange={handleChange} 
-              placeholder="Confirm your password"
-              style={{ 
-                width: '100%', 
-                padding: '12px', 
-                border: '2px solid #ffd700', 
-                borderRadius: '8px', 
-                fontSize: '16px', 
-                transition: 'all 0.3s', 
-                background: 'rgba(255,255,255,0.8)',
-                boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)'
-              }} 
-            />
-            {errors.retypePassword && <span style={{ color: '#ff4500', fontSize: '13px', marginTop: '6px', display: 'block' }}>{errors.retypePassword}</span>}
+            <div style={{ flex: 1 }}>
+              <label htmlFor="retypePassword" style={{ display: 'block', marginBottom: '8px', color: '#00b7eb', fontWeight: '600' }}>Confirm Password</label>
+              <input 
+                type="password" 
+                id="retypePassword" 
+                name="retypePassword" 
+                value={formData.retypePassword} 
+                onChange={handleChange} 
+                placeholder="Confirm your password"
+                style={{ 
+                  width: '100%', 
+                  padding: '12px', 
+                  border: '2px solid #ffd700', 
+                  borderRadius: '8px', 
+                  fontSize: '16px', 
+                  transition: 'all 0.3s', 
+                  background: 'rgba(255,255,255,0.8)',
+                  boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)',
+                  boxSizing: 'border-box'
+                }} 
+              />
+              {errors.retypePassword && <span style={{ color: '#ff4500', fontSize: '13px', marginTop: '6px', display: 'block' }}>{errors.retypePassword}</span>}
+            </div>
           </div>
 
           {errors.form && <div style={{ color: '#ff4500', textAlign: 'center', marginBottom: '20px', fontWeight: '600', fontSize: '14px' }}>{errors.form}</div>}

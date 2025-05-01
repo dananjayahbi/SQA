@@ -164,7 +164,7 @@ const Login = () => {
             fontSize: '32px',
             fontWeight: '700',
             textShadow: '1px 1px 2px rgba(0,0,0,0.1)'
-          }}>Shop Login</h2>
+          }}>Login</h2>
 
           <div style={{ marginBottom: '25px' }}>
             <label htmlFor="email" style={{ display: 'block', marginBottom: '8px', color: '#00b7eb', fontWeight: '600' }}>Email</label>
@@ -236,24 +236,7 @@ const Login = () => {
               {isSubmitting ? 'Logging in...' : 'Login'}
             </button>
 
-            <button 
-              type="button" 
-              onClick={handleReset} 
-              style={{
-                padding: '14px 30px',
-                border: 'none',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontSize: '16px',
-                background: 'linear-gradient(45deg, #ffd700, #ff4500)',
-                color: 'white',
-                transition: 'all 0.3s',
-                boxShadow: '0 4px 10px rgba(0,0,0,0.2)',
-                fontWeight: '600'
-              }}
-            >
-              Reset
-            </button>
+           
           </div>
 
           <div style={{ 
